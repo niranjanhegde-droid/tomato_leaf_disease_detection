@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dataset Tomato Vision</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/bg/tomato.png') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+    background: url('static/images/bg/dark-bg.webp') no-repeat center center fixed;
+    }
+    .bg-info p,
+    .bg-info li {
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+
+  <!-- Section 1: Introduction -->
+  <div class="container mt-5 p-4 bg-info rounded">
+    <div class="row d-flex align-items-center p-4">
+      <div class="col-md-12 p-4 shadow bg-light rounded">
+        <h1 class="text-center fw-semibold">Explore Our Tomato Leaf Disease Image Dataset!</h1>
+        <hr>
+        <p>
+          Welcome to the curated dataset for tomato leaf disease detection — an essential resource designed to support research and model training in precision agriculture. This collection includes a wide range of high-resolution images of tomato leaves affected by various diseases, as well as healthy samples.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Key Features -->
+  <div class="container mt-5 p-4 bg-info rounded">
+    <div class="row d-flex align-items-center p-4">
+      <div class="col-md-12 p-4 shadow bg-light rounded">
+        <h1 class="text-center">Key Features</h1>
+        <hr>
+        <p>A robust and well-labeled dataset is vital for accurate deep learning model performance. Our tomato leaf dataset includes:</p>
+        <ul>
+          <li>
+            <strong>Multiple Disease Classes:</strong> Covers common tomato plant diseases including Early Blight, Late Blight, Septoria Leaf Spot, Leaf Mold, and more.
+          </li>
+          <li>
+            <strong>High-Quality Images:</strong> Clear and detailed images captured in natural conditions to replicate real-world challenges.
+          </li>
+          <li>
+            <strong>Precise Annotations:</strong> Each image is labeled with its correct disease type or marked as healthy.
+          </li>
+          <li>
+            <strong>Balanced Distribution:</strong> Dataset contains a well-balanced number of samples for each class to ensure fair training and evaluation.
+          </li>
+        </ul>
+        <p>
+          This dataset enables accurate model training for disease classification and contributes to AI-powered agriculture solutions.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Download + Samples -->
+  <div class="container mt-5 p-4 bg-info rounded">
+    <div class="row p-4">
+      <div class="col-md-7 p-4 shadow bg-light rounded">
+        <h1 class="text-center">Explore the Dataset</h1>
+        <hr>
+        <ul>
+          <li><strong>Sample Images:</strong>
+            Preview a selection of sample images showing various disease symptoms and healthy leaf textures.
+          </li>
+          <li><strong>Downloadable Dataset:</strong>
+            Download the complete dataset to build and test your own tomato disease detection models. The data is organized and formatted for direct use in machine learning pipelines.
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4 p-4 shadow bg-light rounded d-flex flex-column align-items-center">
+        <h2 class="text-center">Download Here</h2>
+        <hr>
+        <p class="text-center">Tomato_Leaf_Disease_Dataset.zip</p>
+        <a href="https://www.kaggle.com/datasets/kaustubhb999/tomatoleaf" download="Tomato_Leaf_Disease_Dataset.zip" class="btn btn-primary">
+          Download
+        </a>
+      </div>
+    </div>
+  </div>
+    <div class="container shadow bg-info p-4 mt-5">
+        <h2 class="text-center">Sample Images</h2>
+        <hr>
+        <div class="row ">
+            <div class="col-md-3">
+                <img src="static/images/samples/bacterial spot.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4">Bacterial Spot</p>
+            </div>
+            <div class="col-md-3">
+                <img src="static/images/samples/early blight.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4">Early Blight</p>
+            </div>
+            <div class="col-md-3">
+                <img src="static/images/samples/healthy.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4">Healthy leaf</p>
+            </div>
+            <div class="col-md-3">
+                <img src="static/images/samples/late blight.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4">Late Blight</p>
+            </div>
+            <div class="col-md-3">
+                <img src="static/images/samples/yellow leaf curl virus.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4">Yellow Leaf Curl</p>
+            </div>
+            <div class="col-md-3">
+                <img src="static/images/samples/leaf mold.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4">Leaf Mold</p>
+            </div>
+            <div class="col-md-3">
+                <img src="static/images/samples/mosaic virus.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4">Mosaic Virus</p>
+            </div>
+            <div class="col-md-3">
+                <img src="static/images/samples/septoria leaf spot.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4">Septoria leaf spot</p>
+            </div>
+            <div class="col-md-3">
+                <img src="static/imagsamples/septoria leaf spot.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4"></p>
+            </div>
+            <div class="col-md-3">
+                <img src="static/images/samples/spider mites.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4">Spider Mites</p>
+            </div>
+            <div class="col-md-3">
+                <img src="static/images/samples/target spot.JPG" alt="" class="img-thumbnail">
+                <p class="ms-4 fs-4">Target Spot</p>
+            </div>
+        </div>
+    </div>
+  {% include 'footer.html' %}
+
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile</title>
+  <link rel="icon" type="image/png" href="static/images/bg/tomato.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding-top: 80px; /* Match actual navbar height */
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 0;
+}
+
+/* Add a pseudo-element with the blurred background image */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('static/images/bg/light-bg.webp') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(3px);
+  z-index: -1;
+}
+
+    .card-custom {
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.9);
+      transition: transform 0.2s ease;
+    }
+
+    .card-custom:hover {
+      transform: translateY(-4px);
+    }
+
+    .form-control:focus {
+      border-color: #198754;
+      box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+    }
+
+    .scan-card {
+      background-color: #e9f7ef;
+      border-left: 5px solid #198754;
+      border-radius: 0.5rem;
+    }
+
+    .btn-sm {
+      padding: 0.25rem 0.6rem;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+
+  <div class="container py-4">
+    <div class="row g-4">
+      <!-- Profile Update Card -->
+      <div class="col-md-5">
+        <div class="card card-custom p-4">
+          <h3 class="text-center text-success">Profile</h3>
+          <hr />
+          <form action="/update" method="post">
+            <div class="mb-3">
+              <label for="name" class="form-label">Username</label>
+              <input type="text" class="form-control" id="name" name="name" value="{{details.username}}" />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{details.email}}" />
+            </div>
+            <div class="d-flex justify-content-start">
+            <button class="btn btn-success btn-sm mt-2" type="submit">Update Profile</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Password Change Card -->
+      <div class="col-md-7">
+        <div class="card card-custom p-4">
+          <h3 class="text-center text-danger">Change Password</h3>
+          <hr />
+          <form action="/changePassword" method="post">
+            <div class="mb-3">
+              <label for="oldPass" class="form-label">Old Password</label>
+              <input type="password" class="form-control" id="oldPass" name="oldPass" />
+              {% if oldPassError %}
+              <p class="text-danger small mt-1">{{oldPassError}}</p>
+              {% endif %}
+            </div>
+            <div class="mb-3">
+              <label for="newPass" class="form-label">New Password</label>
+              <input type="password" class="form-control" id="newPass" name="newPass" />
+            </div>
+            <div class="mb-3">
+              <label for="confPass" class="form-label">Confirm New Password</label>
+              <input type="password" class="form-control" id="confPass" name="confPass" />
+              {% if newPassError %}
+              <p class="text-danger small mt-1">{{newPassError}}</p>
+              {% endif %}
+            </div>
+            <div class="d-flex justify-content-start">
+            <button class="btn btn-danger btn-sm mt-2" type="submit">Change Password</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Section -->
+    {% if history_items %}
+    <!-- Delete All History Button -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="text-center text-yellow fw-bold mb-5" style="font-size:2.2rem; display: flex; justify-content: center; align-items: center;">
+  Scan History
+</h4>
+  <form action="/delete_all_history" method="POST" onsubmit="return confirm('⚠️ This will delete ALL history! Are you sure?');">
+    <button type="submit" class="btn fw-bold px-4 py-2" style="font-size: 1rem; background-color: #dc3545; color: #fff;">
+      Delete All History
+    </button>
+  </form>
+</div>
+
+
+      <div class="row g-3">
+        {% for history in history_items %}
+        <div class="col-md-6">
+          <div class="p-3 scan-card d-flex justify-content-between align-items-start">
+            <div class="d-flex gap-3">
+              <img src="{{history.image}}" alt="Scan Image" class="img-thumbnail" width="90" />
+              <div>
+                <p class="fw-bold mb-1">Result: {{history.result}}</p>
+                <p class="mb-1">Model: {{history.model_used}}</p>
+                <p class="text-muted mb-1">Date: {{history.date_created}}</p>
+              </div>
+            </div>
+            <form action="/delete_history/{{history.id}}" method="POST"
+              onsubmit="return confirm('Delete this entry?');">
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tomato Vision</title>
+  <link rel="icon" href="static/images/bg/tomato.png" type="image/png"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body {
+    background: url('static/images/bg/dark-bg.webp') no-repeat center center fixed;
+    background-color: #f0f8ff;
+    font-family: Arial, sans-serif;
+  }
+  .key-feature-card {
+    background: linear-gradient(135deg, #fff, #f8f9fa);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+    text-align: center;
+    position: relative;
+  }
+  .key-feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+  .feature-icon {
+    font-size: 3.5rem;
+    color: #0077b6;
+    margin-bottom: 20px;
+    animation: zoomIn 1s;
+  }
+  .key-feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0077b6;
+  }
+  .key-feature-card p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  .glow {
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 119, 182, 0.3), transparent);
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+  .key-feature-card:nth-child(2n) .glow {
+    left: auto;
+    right: -100px;
+  }
+  .key-feature-card:hover .glow {
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1) rotate(45deg); }
+    50% { transform: scale(1.2) rotate(45deg); }
+  }
+  @keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .how-it-works-container {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+  }
+  .how-it-works-container h1 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .how-it-works-container .step img {
+    width: 100px;
+    height: 100px;
+    transition: transform 0.3s;
+  }
+  .how-it-works-container .step img:hover {
+    transform: scale(1.1);
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #0077b6;
+    color: white;
+    font-size: 2rem;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+  }
+  .fab:hover {
+    transform: scale(1.1);
+    background-color: #005f8a;
+  }
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .video-wrapper video {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease;
+    border-radius: 10px;
+  }
+  .main-video { z-index: 1; opacity: 1; }
+  .hover-video { z-index: 2; opacity: 0; }
+  .video-wrapper:hover .main-video { opacity: 0; }
+  .video-wrapper:hover .hover-video { opacity: 1; }
+
+  .glass-box {
+background: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.2);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+width: 100%;
+margin-right: 80px;
+}
+.video-wrapper {
+position: relative;
+width: 100%;
+padding-top: 56.25%; /* 16:9 aspect ratio */
+border-radius: 12px;
+overflow: hidden;
+}
+.video-wrapper video {
+position: absolute;
+width: 100%;
+height: 100%;
+object-fit: cover;
+top: 0;
+left: 0;
+transition: opacity 0.5s ease-in-out;
+border-radius: 12px;
+}
+.video-wrapper .hover-video {
+opacity: 0;
+z-index: 2;
+}
+.video-wrapper .main-video {
+z-index: 1;
+}
+.video-wrapper:hover .hover-video {
+opacity: 1;
+}
+.video-wrapper:hover .main-video {
+opacity: 0;
+}
+  </style>
+</head>
+<body>
+  {% include 'navbar.html' %}
+<br>
+  <!-- Welcome Section -->
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-7 p-5 d-flex flex-column justify-content-center">
+            <h2 class="text-center fw-semibold" style="color:aqua">Welcome to Tomato Vision</h2>
+            <p class="text-center fs-custom" style="color: white;font-size: 1.2rem;">
+                 Tomato Vision is a state-of-the-art deep learning model designed to revolutionize the way we detect and manage tomato leaf diseases.
+                 By harnessing the power of advanced neural networks, we provide farmers and agricultural professionals with an efficient,
+                 accurate, and user-friendly solution for identifying and addressing tomato leaf diseases in real-time.
+                 <br><br>
+                This advanced artificial intelligence system leverages cutting-edge deep learning techniques to precisely detect,
+                 classify, and monitor a wide range of tomato leaf diseases, enabling early diagnosis and effective intervention to 
+                 support healthier crop yields and more sustainable farming practices.        </p>
+          </div>
+        <div class="col-md-5 d-flex align-items-center justify-content-center">
+            <!-- Glassmorphism Box -->
+            <div class="glass-box p-3 rounded-4">
+              <div class="row g-3">
+                <div class="col-12">
+                  <div class="video-wrapper">
+                    <video class="main-video" autoplay loop muted playsinline>
+                      <source src="static/images/bg/tomato.mp4" type="video/mp4">
+                    </video>
+                    <video class="hover-video" autoplay loop muted playsinline>
+                      <source src="static/images/bg/tomato_hover.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+  
+  <!-- Key Features -->
+  <div class="container mt-5 shadow p-4">
+    <h1 class="text-center animate__animated animate__fadeInDown" style="color:#00bcd4">Key Features</h1>
+    <hr>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="key-feature-card">
+          <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="glow"></div>
+          <h3>Accuracy and Precision</h3>
+          <p>This deep learning model can identify leaf disease accurately for any provided images.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="key-feature-card">
+          <div class="feature-icon"><i class="fas fa-seedling"></i></div>
+          <div class="glow"></div>
+          <h3>Diverse Disease Coverage</h3>
+          <p>This model is trained to identify 10+ leaf disease with high precision and also gives curing methods.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="key-feature-card">
+          <div class="feature-icon"><i class="fas fa-users"></i></div>
+          <div class="glow"></div>
+          <h3>User-Friendliness</h3>
+          <p>Our intuitive interface ensures an enjoyable and seamless user experience, compatible with all devices.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="key-feature-card">
+          <div class="feature-icon"><i class="fas fa-stopwatch"></i></div>
+          <div class="glow"></div>
+          <h3>Real-Time Results</h3>
+          <p>Get instantaneous identification results, thanks to our efficient neural network layers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How It Works -->
+  <div class="container mt-3 p-4 shadow how-it-works-container">
+    <h1 class="text-center">How It Works</h1>
+    <hr>
+    <div class="row text-center align-items-center">
+      <div class="col-md-6">
+        <div class="step d-flex flex-column align-items-center">
+          <img src="../static/images/bg/uploadingIcon.png" alt="Upload Icon">
+          <p class="fs-4 mt-3"><strong>Step 1:</strong> Upload a Leaf Image</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="step d-flex flex-column align-items-center">
+          <img src="../static/images/bg/loading.png" alt="Loading Icon">
+          <p class="fs-4 mt-3"><strong>Step 2:</strong> Get Results in Seconds</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Get Started -->
+  <div class="container text-center mt-4 p-4 shadow">
+    <h2 class="mb-3" style="color:#00bcd4">Ready to Get Started?</h2>
+    <a href="/login" class="btn btn-primary btn-lg">Get Started</a>
+  </div>
+  {% include 'footer.html' %}
+
+  <!-- Scroll to Top Button -->
+  <div class="fab" onclick="window.scrollTo(0, 0);">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+</body>
+</html>

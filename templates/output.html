@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tomato Leaf Detection</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding-top: 80px; /* Match actual navbar height */
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 0;
+}
+
+/* Add a pseudo-element with the blurred background image */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('static/images/bg/tomato_bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(3px);
+  z-index: -1;
+}
+
+    .card-style {
+      background-color: white;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-section {
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 15px;
+    }
+
+    .image-preview {
+      border-radius: 15px;
+      border: 3px dashed #4caf50;
+      background-color: #f9fbe7;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .btn-custom {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-custom:hover {
+      background: linear-gradient(to right, #34e89e, #0f3443);
+      color: white;
+    }
+
+    .prediction-box {
+      background: linear-gradient(to right, #5cbed1, #169485);
+      color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+    }
+
+    hr {
+      border-top: 2px solid #4caf50;
+      width: 100px;
+      margin: auto;
+    }
+    h1 {color:#ffffff}
+  </style>
+</head>
+
+<body>
+
+  {% include 'navbar.html' %}
+    
+  <div class="container py-5">
+    <div class="row g-4 align-items-start">
+      <!-- Form Section -->
+      <div class="col-md-5">
+  <div class="form-section card-style">
+    <h4 class="mb-4 text-primary">Upload Image</h4>
+    <form action="" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="model" class="form-label">Select Model</label>
+        <select name="model_no" id="model" class="form-select">
+          <option value="0" {% if selected_model == 0 %}selected{% endif %}>CNN Model</option>
+          <option value="1" {% if selected_model == 1 %}selected{% endif %}>EfficientNet Model</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="file" class="form-label">Select Image</label>
+        <input type="file" class="form-control" name="imagefile" id="file" required />
+      </div>
+      <div class="text-end">
+        <button type="submit" class="btn btn-custom">Scan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+      <!-- Image Preview Section -->
+<div class="col-md-7">
+  <div class="image-preview card-style position-relative" id="previewSection">
+    <h4 class="text-success">Uploaded Image Preview</h4>
+    <hr class="mb-3">
+    <div id="previewContent">
+      {% if image %}
+      <img src="{{ image }}" alt="Tomato Leaf" class="img-fluid mt-3" style="max-height: 350px;" />
+      {% else %}
+      <p class="text-muted mt-4">No image uploaded yet</p>
+      {% endif %}
+    </div>
+    <div id="loadingSpinner" class="text-center d-none mt-4">
+      <div class="spinner-border text-success" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-2 fw-bold text-success">Processing Image...</p>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Prediction Section -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="prediction-box text-center">
+          <h2 class="fw-bold">Prediction Result</h2>
+          <hr class="mb-4">
+          {% if result %}
+<h3><b>Result:</b> The leaf is <strong>{{ result }}</strong></h3>
+
+<!-- Question for solution -->
+<div class="mt-4">
+  <p class="fw-bold">Do you want a solution for this disease?</p>
+  <div>
+    <a href="/remedies" class="btn btn-success me-2">Yes</a>
+    <button class="btn btn-secondary" onclick="location.reload()">No</button>
+  </div>
+</div>
+
+{% else %}
+<p class="fst-italic">Awaiting image scan...</p>
+{% endif %}
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+   <script>
+  document.querySelector("form").addEventListener("submit", function (e) {
+    const fileInput = document.getElementById("file");
+
+    if (!fileInput.value) {
+      e.preventDefault();
+      alert("Please upload an image before submitting.");
+      return;
+    }
+
+    // Show the loading spinner and hide the image
+    const spinner = document.getElementById("loadingSpinner");
+    const preview = document.getElementById("previewContent");
+    spinner.classList.remove("d-none");
+    preview.classList.add("d-none");
+  });
+</script>
+
+
+</body>
+
+</html>

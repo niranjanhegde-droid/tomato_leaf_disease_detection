@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tomato Leaf Remedies</title>
+  <link rel="icon" type="image/png" href="static/images/bg/tomato.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+   body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding-top: 80px; /* Match actual navbar height */
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 0;
+}
+
+/* Add a pseudo-element with the blurred background image */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('static/images/bg/bg_tomato_pic.jpg') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(3px);
+  z-index: -1;
+}
+
+    .remedy-card {
+      background: linear-gradient(135deg, #ffffff 60%, #e8f0ff 100%);
+      border-radius: 1.2rem;
+      padding: 1.7rem 1.3rem;
+      box-shadow: 0 8px 24px rgba(44, 62, 80, 0.10), 0 1.5px 4px rgba(214, 51, 132, 0.07);
+      height: 100%;
+      transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
+      border: 1.5px solid #e3e3e3;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .remedy-card:hover {
+      transform: translateY(-8px) scale(1.025);
+      box-shadow: 0 16px 32px rgba(44, 62, 80, 0.13), 0 3px 12px rgba(214, 51, 132, 0.10);
+      border-color: #d63384;
+    }
+
+    .remedy-card h4 {
+      font-weight: 700;
+      color: #d63384;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.7rem;
+    }
+
+    .remedy-card hr {
+      border-top: 2px solid #d63384;
+      width: 60px;
+      margin: 0.5rem auto 1rem auto;
+      opacity: 0.7;
+    }
+
+    .remedy-card ul {
+      padding-left: 1.2rem;
+      margin-bottom: 0;
+    }
+
+    .remedy-card li {
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+      color: #3a3a3a;
+    }
+
+    .remedy-card p {
+      color: #444;
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+
+   
+    .row.equal-height > div {
+      display: flex;
+    }
+
+    @media (max-width: 991px) {
+      .row.row-cols-md-3 > * {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+    }
+    @media (max-width: 767px) {
+      .row.row-cols-md-3 > * {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+      .remedy-card {
+        padding: 1.2rem 0.7rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+  <div class="container py-4">
+    <h2 class="text-center text-yellow fw-bold mb-5">Tomato Leaf Disease Remedies</h2>
+    
+    <!-- Healthy Leaf Row (single column centered) -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="remedy-card">
+          <!-- <span class="badge">Healthy</span> -->
+          <h4 class="text-center">Healthy Tomato Leaf</h4>
+          <hr>
+          <p><strong>Description:</strong> Bright green, smooth-edged leaves with no discoloration, spots, or curling. Healthy leaves indicate balanced watering, proper sunlight, and disease-free conditions.</p>
+          <p><strong>Tips to Maintain Health:</strong></p>
+          <ul>
+            <li>Water at the base to avoid wetting leaves.</li>
+            <li>Use mulch to retain moisture and reduce splash-borne diseases.</li>
+            <li>Inspect regularly for pests or early signs of disease.</li>
+            <li>Provide full sun and adequate spacing between plants.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {% set diseases = [
+      {
+        'name': 'Tomato - Bacterial Spot',
+        'symptoms': 'Dark, water-soaked spots on leaves and fruit. Yellow halos may appear. Leaves may fall prematurely.',
+        'remedies': [
+          'Use certified disease-free seeds or transplants.',
+          'Avoid overhead irrigation and work when foliage is dry.',
+          'Apply copper-based bactericides as preventive measures.',
+          'Practice crop rotation and remove infected debris.'
+        ]
+      },
+      {
+        'name': 'Tomato - Early Blight',
+        'symptoms': 'Dark concentric rings on older leaves, progressing upward. Yellowing and defoliation occur.',
+        'remedies': [
+          'Remove and destroy infected plant parts.',
+          'Use resistant varieties and space plants for air flow.',
+          'Apply fungicides such as chlorothalonil or mancozeb.',
+          'Avoid watering foliage and rotate crops regularly.'
+        ]
+      },
+      {
+        'name': 'Tomato - Late Blight',
+        'symptoms': 'Large, irregular, water-soaked lesions on leaves, stems, and fruits. Rapid spread under humid conditions.',
+        'remedies': [
+          'Use certified disease-free seed potatoes and resistant varieties.',
+          'Apply systemic fungicides (e.g., metalaxyl).',
+          'Destroy infected plants immediately.',
+          'Maintain proper spacing and air circulation.'
+        ]
+      },
+      {
+        'name': 'Tomato - Leaf Mold',
+        'symptoms': 'Yellow spots on upper leaf surfaces, olive-green mold on undersides. Leaves may curl and drop.',
+        'remedies': [
+          'Improve air circulation and reduce humidity in greenhouses.',
+          'Apply fungicides such as chlorothalonil.',
+          'Remove and destroy infected leaves.',
+          'Use resistant tomato cultivars.'
+        ]
+      },
+      {
+        'name': 'Tomato - Septoria Leaf Spot',
+        'symptoms': 'Small, circular spots with dark borders and gray centers. Premature defoliation is common.',
+        'remedies': [
+          'Use drip irrigation to keep leaves dry.',
+          'Apply fungicides like copper hydroxide.',
+          'Remove lower infected leaves early.',
+          'Practice crop rotation and garden hygiene.'
+        ]
+      },
+      {
+        'name': 'Tomato - Spider Mites (Two-Spotted)',
+        'symptoms': 'Yellow stippling on leaves, webbing under severe infestations. Leaf curling and drop may occur.',
+        'remedies': [
+          'Use insecticidal soap or neem oil.',
+          'Introduce predatory mites or ladybugs.',
+          'Increase humidity around plants.',
+          'Avoid drought stress by consistent watering.'
+        ]
+      },
+      {
+        'name': 'Tomato - Target Spot',
+        'symptoms': 'Small spots with tan centers and dark edges. Can affect leaves, stems, and fruit.',
+        'remedies': [
+          'Apply fungicides like chlorothalonil or copper compounds.',
+          'Improve airflow and reduce leaf wetness.',
+          'Remove infected plant material.',
+          'Rotate crops and avoid overhead watering.'
+        ]
+      },
+      {
+        'name': 'Tomato - Yellow Leaf Curl Virus',
+        'symptoms': 'Leaf curling, yellowing, stunted growth, and reduced fruit production. Transmitted by whiteflies.',
+        'remedies': [
+          'Use virus-free seedlings and resistant varieties.',
+          'Control whiteflies using yellow sticky traps.',
+          'Apply insecticides if necessary.',
+          'Use row covers to prevent insect contact.'
+        ]
+      },
+      {
+        'name': 'Tomato - Mosaic Virus',
+        'symptoms': 'Mottled light and dark green leaves, stunted growth, and reduced yields.',
+        'remedies': [
+          'Avoid handling plants when wet.',
+          'Remove and destroy infected plants.',
+          'Use resistant cultivars and certified seed.',
+          'Control aphids and disinfect tools regularly.'
+        ]
+      }
+    ] %}
+
+    <!-- Disease Remedies Grid -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 equal-height">
+      {% for disease in diseases %}
+      <div class="col d-flex">
+        <div class="remedy-card flex-fill">
+          <!-- <span class="badge">Disease</span> -->
+          <h4 class="text-center">{{ disease.name }}</h4>
+          <hr>
+          <p><strong>Symptoms:</strong> {{ disease.symptoms }}</p>
+          <p><strong>Curing Methods:</strong></p>
+          <ul>
+            {% for remedy in disease.remedies %}
+            <li>{{ remedy }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+</body>
+</html>
